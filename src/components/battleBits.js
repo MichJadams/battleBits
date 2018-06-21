@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../style/battleBits.css';
 import battleship from '../style/assets/navy-ship.svg'
 import mine from '../style/assets/mine.png'
+import { findSolution, randomInteger } from '../helperFuncs'
 
 export default class Play extends Component {
   constructor(props) {
@@ -21,8 +22,7 @@ export default class Play extends Component {
       lives: this.props.history.location.State.lives || 3,
       highest: this.props.history.location.State.highest
     }
-    this.randomInteger = this.randomInteger.bind(this)
-    this.findSolution = this.findSolution.bind(this)
+
     this.playAgain = this.playAgain.bind(this)
     this.checkRow = this.checkRow.bind(this)
     this.guessChange = this.guessChange.bind(this)
@@ -41,21 +41,16 @@ export default class Play extends Component {
       })
     })
   }
+
   generateGrid() {
     let gridout = []
     for (let i = 0; i < this.state.difficulty; i++) {
-      let row = this.findSolution(this.randomInteger())
+      let row = findSolution(randomInteger(+this.state.highest))
       gridout.push(row)
     }
     return gridout
   }
-  randomInteger() {
-    return Math.floor(Math.random() * Math.pow(+this.state.highest, 2))
-  }
-  findSolution(decimalNumber) {
-    let binary = decimalNumber.toString(2).padStart(8, "0").split("")
-    return binary
-  }
+
   guessChange(event) {
     this.setState({ guess: event.target.value })
   }
