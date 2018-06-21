@@ -13,7 +13,8 @@ export default class Play extends Component {
       inputArry: [0,0,0,0,0,0,0,0],
       solutionArray: [],
       won: false,
-      powers:[]
+      powers:[],
+      highest: 3
     }
     this.randomInteger = this.randomInteger.bind(this)
     this.toggle = this.toggle.bind(this)
@@ -26,7 +27,9 @@ export default class Play extends Component {
     console.log("the props",this.props.history.location.State)
     this.setState({difficulty:this.props.history.location.State.difficulty, 
       showMod: this.props.history.location.State.showMod, 
-      showPow: this.props.history.location.State.showPow})
+      showPow: this.props.history.location.State.showPow,
+      highest: this.props.history.location.State.highest
+    })
     this.setState({number:this.randomInteger()},()=>{
       this.setState({solutionArray:this.findSolution()})
       this.setState({powers: this.findPowers()},()=>{
@@ -53,12 +56,10 @@ export default class Play extends Component {
   }
 
   randomInteger(){
-    return Math.floor(Math.random() * this.state.difficulty)
+    return Math.floor(Math.random() * Math.pow(+this.state.highest,2))
   }
   findSolution(){
     let binary = this.state.number.toString(2).padStart(this.state.inputArry.length,"0").split("")
-    // console.log("")
-    //  this.setState({solutionArray:binary})
     return binary
   }
   toggle(event){
@@ -79,18 +80,16 @@ export default class Play extends Component {
     })
   }
   playAgain(){
-
     this.setState({
       startTime:  false, 
       difficulty: 100, 
       showMod: false,
       inputArry: [0,0,0,0,0,0,0,0],
-      won: false
+      won: false,
+      number:this.randomInteger()
     },()=>{
-      this.setState({number:this.randomInteger()},()=>{
-        this.setState({solutionArray:this.findSolution()},()=>{
-          this.calcAmountLeft()
-        })
+      this.setState({solutionArray:this.findSolution()},()=>{
+        this.calcAmountLeft()
       })
     })
     }
@@ -99,11 +98,14 @@ export default class Play extends Component {
     console.log("the show", this.state.showPow)
         return (<div className="aboutMeContainer">
            <div>This is your number: {this.state.number}</div>
-           <div>Timer:</div>
+           <div>The boxes start out showing all zeros. Click on them to toggle them to creat the binary representation of the decimal number  {this.state.number}</div>
+           <div>(coming soon)Timer:</div>
            {
-             this.state.showMod? <div>amount left: {this.state.amountLeft}</div>:null
+             this.state.showMod == 'true'? <div>The amount of decimal number to still 'take away': {this.state.amountLeft}</div>:null
            }
-           
+           {
+             this.state.showPow == 'true'? <div>This is the amount that placeing a 1 here represents</div>: null
+           }
            <div className='binaryBox'>
            {
              this.state.showPow === 'true'? this.state.powers.map((el,ind)=>{
@@ -124,7 +126,6 @@ export default class Play extends Component {
              this.state.won?
              <div onClick={this.playAgain}><button>You won!Play again?</button ></div>
              :null
-
            }
         </div>)      
   }
