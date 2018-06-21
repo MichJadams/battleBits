@@ -26,14 +26,14 @@ export default class Play extends Component {
     this.checkRow = this.checkRow.bind(this)
     this.guessChange = this.guessChange.bind(this)
     this.generateGrid = this.generateGrid.bind(this)
+    this.flashy = this.flashy.bind(this)
   }
   componentWillMount(){
-    console.log("the props",this.props.history.location.State)
+    console.log("the highest",this.props.history.location.State.highest)
     this.setState({difficulty:this.props.history.location.State.difficulty, 
       showMod: this.props.history.location.State.showMod, 
       showPow: this.props.history.location.State.showPow},()=>{
           this.setState({grid: this.generateGrid()},()=>{
-
               console.log("the gird", this.state.grid)
           })
       })
@@ -47,7 +47,7 @@ export default class Play extends Component {
       return gridout
   }
   randomInteger(){
-    return Math.floor(Math.random() * Math.pow(this.state.difficulty,2))
+    return Math.floor(Math.random() * Math.pow(+this.state.highest,2))
   }
   findSolution(decimalNumber){
     let binary = decimalNumber.toString(2).padStart(8,"0").split("")
@@ -78,6 +78,9 @@ export default class Play extends Component {
         }
       } 
   }
+ flashy(){
+  //maybe do a cool thing here, for when they win
+ }
   playAgain(){
     // this.setState({
     //   startTime:  false, 
@@ -95,6 +98,7 @@ export default class Play extends Component {
         return (this.state.dead? <div>You are dead.</div>:<div className="aboutMeContainer">
            <div>Timer:</div>
            <div className='binaryBox'>
+           {this.state.won? this.flashy():null}
            {
              this.state.showPow === 'true'? this.state.inputArry.map((_,ind)=>{
                return (<div className='binary'>{Math.pow(2,this.state.inputArry.length - ind -1)}</div>)
