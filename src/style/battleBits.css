@@ -13,7 +13,20 @@
     margin: 1px; 
 }
 .binarySelected{
+    display: flex; 
     padding: 1%;
     border: solid 1px;
-    margin: 1px; 
+    margin: 1px;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.mine {
+    width: 100%;
+    
+}
+
+.battleship {
+    width: 100%;
+    align-self: center;
 }
