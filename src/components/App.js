@@ -35,7 +35,7 @@ handleSubmitPractice(){
     this.props.history.push({pathname:`/play`, State: {difficulty: this.state.difficulty,showMod: this.state.showMod,showPow: this.state.showPow }})
 }
 handleSubmitPlay(){
-    this.props.history.push({pathname:`/battleBits`, State: {difficulty: this.state.difficulty,showMod: this.state.showMod,showPow: this.state.showPow }})
+    this.props.history.push({pathname:`/battleBits`, State: {difficulty: this.state.difficulty,showMod: this.state.showMod,showPow: this.state.showPow, lives:this.state.lives }})
 }
   render() {
     return (

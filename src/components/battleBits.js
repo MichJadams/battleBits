@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../style/battleBits.css';
-
+import hotDog from '../style/assets/hotDog.jpg'
+import pizza from '../style/assets/pizza.jpg'
 
 export default class Play extends Component {
   constructor(props){
@@ -39,14 +40,14 @@ export default class Play extends Component {
   }
   generateGrid(){
         let gridout = []
-      for(let i = 0; i < 8; i++){
+      for(let i = 0; i < this.state.difficulty; i++){
           let row = this.findSolution(this.randomInteger())
         gridout.push(row)
       }
       return gridout
   }
   randomInteger(){
-    return Math.floor(Math.random() * 256)
+    return Math.floor(Math.random() * Math.pow(this.state.difficulty,2))
   }
   findSolution(decimalNumber){
     let binary = decimalNumber.toString(2).padStart(8,"0").split("")
@@ -62,7 +63,7 @@ export default class Play extends Component {
       console.log("the input value in decimal is ",this.state.guess.toString(2))
       if(inputNum == neededNum){
           console.log("you are the smartest person alive")
-          if(this.state.selectedRow === this.state.difficulty){
+          if(this.state.selectedRow === this.state.difficulty -1 ){
             console.log("YOU WON!!!!")
             this.setState({won:true})
           }else{
@@ -70,7 +71,6 @@ export default class Play extends Component {
             this.setState({selectedRow:nextrow})
           }
       }else{
-        //they got the wrong answer
         let livesLeft = this.state.lives -1 
         this.setState({lives: livesLeft})
         if(livesLeft < 0){
@@ -79,16 +79,17 @@ export default class Play extends Component {
       } 
   }
   playAgain(){
-    this.setState({
-      startTime:  false, 
-      difficulty: this.props.history.location.State.difficulty, 
-      showMod: false,
-      number: this.randomInteger(), 
-      inputArry: [0,0,0,0,0,0,0,0],
-      won: false
-    }, ()=>{
-      this.setState({solutionArray:this.findSolution(this.state.number)})
-    })
+    // this.setState({
+    //   startTime:  false, 
+    //   difficulty: this.props.history.location.State.difficulty, 
+    //   showMod: false,
+    //   number: this.randomInteger(), 
+    //   inputArry: [0,0,0,0,0,0,0,0],
+    //   won: false
+    // }, ()=>{
+    //   this.setState({solutionArray:this.findSolution(this.state.number)})
+    // })
+    this.props.history.push({pathname:`/`})
   }
   render() {
         return (this.state.dead? <div>You are dead.</div>:<div className="aboutMeContainer">

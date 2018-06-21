@@ -99,9 +99,13 @@ export default class Play extends Component {
     console.log("the show", this.state.showPow)
         return (<div className="aboutMeContainer">
            <div>This is your number: {this.state.number}</div>
-           <div>Timer:</div>
+           <div>The boxes start out showing all zeros. Click on them to toggle them to creat the binary representation of the decimal number  {this.state.number}</div>
+           <div>(coming soon)Timer:</div>
            {
-             this.state.showMod == 'true'? <div>amount left: {this.state.amountLeft}</div>:null
+             this.state.showMod == 'true'? <div>The amount of decimal number to still 'take away': {this.state.amountLeft}</div>:null
+           }
+           {
+             this.state.showPow == 'true'? <div>This is the amount that placeing a 1 here represents</div>: null
            }
            <div className='binaryBox'>
            {
