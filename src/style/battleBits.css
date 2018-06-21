@@ -1,0 +1,19 @@
+.binaryBox{
+    display: flex; 
+    justify-content: space-around;
+}
+.binaryBoxSelected{
+    display: flex; 
+    justify-content: space-around;
+    background-color: rgba(255,0,0,0.7)
+}
+.binary{
+    padding: 1%;
+    border: solid 1px;
+    margin: 1px; 
+}
+.binarySelected{
+    padding: 1%;
+    border: solid 1px;
+    margin: 1px; 
+}

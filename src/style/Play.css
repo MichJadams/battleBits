@@ -1,0 +1,9 @@
+.binaryBox{
+    display: flex; 
+    justify-content: space-around;
+}
+.binary{
+    padding: 1%;
+    border: solid 1px;
+    margin: 1px; 
+}
