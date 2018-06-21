@@ -12,6 +12,7 @@ export default class Play extends Component {
       difficulty: 8,
       showMod: false,
       number: 0,
+      showPow: this.props.history.location.State.showPow,
       grid: [[]],
       inputArry: [0, 0, 0, 0, 0, 0, 0, 0],
       solutionArray: [],
@@ -96,8 +97,12 @@ export default class Play extends Component {
     this.props.history.push({ pathname: `/` })
   }
   render() {
-    return (this.state.dead ? <div>You are dead.</div> : <div className="aboutMeContainer">
+    return (this.state.dead ? <div>You are dead.</div> : 
+      <div className="aboutMeContainer">
       <div>Timer:</div>
+      {
+        this.state.showPow == 'true' ? <div>This is the amount that placeing a 1 here represents</div> : null
+      }
       <div className='binaryBox'>
         {this.state.won ? this.flashy() : null}
         {

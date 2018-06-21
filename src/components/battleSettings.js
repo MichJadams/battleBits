@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import '../style/App.css';
+import '../style/battleSettings.css';
 
 
-export default class Home extends Component {
+export default class battleSettings extends Component {
   constructor() {
     super()
     this.state = {
@@ -17,10 +16,11 @@ export default class Home extends Component {
     this.handleDifficultyChange = this.handleDifficultyChange.bind(this)
     this.handleshowModChange = this.handleshowModChange.bind(this)
     this.handleshowPowChange = this.handleshowPowChange.bind(this)
-    this.handleSubmitPractice = this.handleSubmitPractice.bind(this)
+    // this.handleSubmitPractice = this.handleSubmitPractice.bind(this)
     this.handleSubmitPlay = this.handleSubmitPlay.bind(this)
     this.handleLivesChange = this.handleLivesChange.bind(this)
     this.handlehighestChange = this.handlehighestChange.bind(this)
+    this.backToSelect = this.backToSelect.bind(this)
   }
   handleDifficultyChange(event) {
     this.setState({ difficulty: event.target.value })
@@ -37,20 +37,20 @@ export default class Home extends Component {
   handlehighestChange(event) {
     this.setState({ highest: event.target.value })
   }
-  handleSubmitPractice() {
-    this.props.history.push({ pathname: `/play`, State: { highest: this.state.highest, difficulty: this.state.difficulty, showMod: this.state.showMod, showPow: this.state.showPow } })
-  }
   handleSubmitPlay() {
     this.props.history.push({ pathname: `/battleBits`, State: { highest: this.state.highest, difficulty: this.state.difficulty, showMod: this.state.showMod, showPow: this.state.showPow, lives: this.state.lives } })
+  }
+  backToSelect(){
+    this.props.history.push({pathname:'/'})
   }
   render() {
     return (
       <div className="LandingPageContainer">
-        <div className="LandingPageheader">Landing page here!</div>
-        <div>instructions here</div>
+        <div className="LandingPageheader">Prepare for battle</div>
+        <div className='battleTitle'>Select how hard you want to fight</div>
         <form onSubmit={this.handleSubmit} className='gameOptionsForm'>
           <ul>
-            difficulty
+            Difficulty
                 <input type="number" value={this.state.difficulty} onChange={this.handleDifficultyChange} />
           </ul>
           <ul>
@@ -78,15 +78,15 @@ export default class Home extends Component {
             </select>
           </ul>
           <ul>
-            Show the various powers of 2? (12,4,8,16,32 ect... :
+            Show the various powers of 2? (1,2,4,8,16,32 ect...):
                 <select value={this.state.showPow} onChange={this.handleshowPowChange}>
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
           </ul>
-          <button autoFocus type="button" onClick={this.handleSubmitPractice}>Practice!</button>
         </form>
-        <button autoFocus onClick={this.handleSubmitPlay}>Place battleBits!</button>
+        <button autoFocus onClick={this.handleSubmitPlay}>Play battleBits!</button>
+        <button  type="button" onClick={this.backToSelect}>Back to select game mode</button>
       </div>
     );
   }

@@ -21,6 +21,7 @@ export default class Play extends Component {
     // this.randomInteger = this.randomInteger.bind(this)
     this.toggle = this.toggle.bind(this)
     // this.findSolution = this.findSolution.bind(this)
+    this.backToSettings = this.backToSettings.bind(this)
     this.playAgain = this.playAgain.bind(this)
     this.findPowers = this.findPowers.bind(this)
     this.calcAmountLeft = this.calcAmountLeft.bind(this)
@@ -75,6 +76,9 @@ export default class Play extends Component {
       this.calcAmountLeft()
     })
   }
+  backToSettings(){
+    this.props.history.push({pathname: '/practiceSettings'})
+  }
   playAgain() {
     this.setState({
       startTime: false,
@@ -120,7 +124,10 @@ export default class Play extends Component {
       </div>
       {
         this.state.won ?
-          <div onClick={this.playAgain}><button>You won!Play again?</button ></div>
+          <div >
+          <button onClick={this.playAgain}>You won!Play again?</button >
+          <button onClick={this.backToSettings}>Back to settings</button >
+          </div>
           : null
       }
     </div>)
