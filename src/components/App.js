@@ -8,10 +8,10 @@ export default class Home extends Component {
     super()
     this.state={
       startTime: 0,
-      difficulty:1,
+      difficulty:8,
       showMod: 'false', 
       showPow: 'false',
-      
+      lives: 3
     }
     this.handleDifficultyChange = this.handleDifficultyChange.bind(this)
     this.handleshowModChange = this.handleshowModChange.bind(this)
@@ -25,11 +25,11 @@ export default class Home extends Component {
   handleshowModChange(event){
     this.setState({showMod:event.target.value})
 }
+handleLivesChange(event){
+  this.setState({lives: event.target.value})
+}
 handleshowPowChange(event){
-    this.setState({showPow: event.target.value},()=>{
-
-        console.log("dsf",this.state.showPow)
-    })
+    this.setState({showPow: event.target.value})
 }
 handleSubmitPractice(){
     this.props.history.push({pathname:`/play`, State: {difficulty: this.state.difficulty,showMod: this.state.showMod,showPow: this.state.showPow }})
@@ -46,6 +46,10 @@ handleSubmitPlay(){
               <ul>
                 difficulty
                 <input type="number" value={this.state.difficulty} onChange={this.handleDifficultyChange} />
+              </ul>
+              <ul>
+                Number of lives you get for battle bites 
+                <input type="number" value={this.state.lives} onChange={this.handleLivesChange} />
               </ul>
               <ul>
                 Show a second number that shows how much is 'left' to represent in binary:

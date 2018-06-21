@@ -7,7 +7,7 @@ export default class Play extends Component {
     super(props)
     this.state={
       startTime:  false, 
-      difficulty: 256, 
+      difficulty: 8, 
       showMod: false,
       number: 0, 
       grid:[[]],
@@ -15,10 +15,11 @@ export default class Play extends Component {
       solutionArray: [],
       won: false,
       guess: 0,
-      selectedRow: 3,
+      selectedRow: 0,
+      dead: false, 
+      lives: this.props.history.location.State.lives || 3
     }
     this.randomInteger = this.randomInteger.bind(this)
-    this.toggle = this.toggle.bind(this)
     this.findSolution = this.findSolution.bind(this)
     this.playAgain = this.playAgain.bind(this)
     this.checkRow = this.checkRow.bind(this)
@@ -51,42 +52,36 @@ export default class Play extends Component {
     let binary = decimalNumber.toString(2).padStart(8,"0").split("")
     return binary
   }
-  toggle(event){
-      console.log("clicked, ",event.currentTarget.dataset)
-    let copyOfState = this.state.inputArry.slice()
-    copyOfState[+event.currentTarget.dataset.id] = +!copyOfState[+event.currentTarget.dataset.id]
-    let failed = false
-    copyOfState.map((el, ind)=>{
-      if(el !== +this.state.solutionArray[ind]){
-        failed = true 
-      }
-    })
-    if(!failed){
-      console.log("won")
-      this.setState({won:true})
-    }
-    this.setState({inputArry: copyOfState})
-  }
   guessChange(event){
     this.setState({guess:event.target.value})
   }
-  checkRow(event){
-
-    //   console.log("CHECKING! this row",this.state.selectedRow, "with this value", this.state.guess)
-      let neededNum = parseInt(this.state.grid[this.state.selectedRow].join(''),10)
-      let inputNum =  this.state.guess
-      console.log("the needed value for this row is", neededNum)
-      console.log("the input value in binary is ",this.state.guess.toString(2))
+  checkRow(){
+      let neededNum = Number.parseInt(this.state.grid[this.state.selectedRow].join(''),2)
+      let inputNum =  this.state.guess.toString(2)
+      console.log("the needed decimal value for this row is",neededNum)
+      console.log("the input value in decimal is ",this.state.guess.toString(2))
       if(inputNum == neededNum){
           console.log("you are the smartest person alive")
-      }
-      //write the rest of the game logic here. you goddamn genius. 
-
+          if(this.state.selectedRow === this.state.difficulty){
+            console.log("YOU WON!!!!")
+            this.setState({won:true})
+          }else{
+            let nextrow = this.state.selectedRow + 1
+            this.setState({selectedRow:nextrow})
+          }
+      }else{
+        //they got the wrong answer
+        let livesLeft = this.state.lives -1 
+        this.setState({lives: livesLeft})
+        if(livesLeft < 0){
+          this.setState({dead:true})
+        }
+      } 
   }
   playAgain(){
     this.setState({
       startTime:  false, 
-      difficulty: 100, 
+      difficulty: this.props.history.location.State.difficulty, 
       showMod: false,
       number: this.randomInteger(), 
       inputArry: [0,0,0,0,0,0,0,0],
@@ -96,7 +91,7 @@ export default class Play extends Component {
     })
   }
   render() {
-        return (<div className="aboutMeContainer">
+        return (this.state.dead? <div>You are dead.</div>:<div className="aboutMeContainer">
            <div>Timer:</div>
            <div className='binaryBox'>
            {

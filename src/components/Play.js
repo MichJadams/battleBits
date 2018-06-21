@@ -101,9 +101,8 @@ export default class Play extends Component {
            <div>This is your number: {this.state.number}</div>
            <div>Timer:</div>
            {
-             this.state.showMod? <div>amount left: {this.state.amountLeft}</div>:null
+             this.state.showMod == 'true'? <div>amount left: {this.state.amountLeft}</div>:null
            }
-           
            <div className='binaryBox'>
            {
              this.state.showPow === 'true'? this.state.powers.map((el,ind)=>{
@@ -124,7 +123,6 @@ export default class Play extends Component {
              this.state.won?
              <div onClick={this.playAgain}><button>You won!Play again?</button ></div>
              :null
-
            }
         </div>)      
   }
