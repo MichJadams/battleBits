@@ -1,48 +1,52 @@
+.battleBitsContainer{
+    background-color: gray;
+}
 .binaryBox{
+    width: 90vw;
     display: flex; 
-    justify-content: space-around;
+    align-self: center;
+    margin-left: 5vw;
 }
 .binaryBoxSelected{
-    display: flex; 
-    justify-content: space-around;
-    background-color: rgba(255,0,0,0.7)
+    margin: 3px;
+    width: 90vw; 
+    margin-left: 5vw;
+    background-color: rgba(255,0,0,0.8);
 }
 .binary{
-    display: flex; 
     padding: 1%;
     border: solid 1px;
     margin: 1px;
-    align-items: center;
-    flex-grow: 1; 
 }
-/* .binarySelected{
-    display: flex; 
-    padding: 1%;
-    border: solid 1px;
-    margin: 1px;
-    align-items: center;
-    flex-grow: 1;
-} */
 
 .mine {
-    width: 100px;
-    
+    width: 50px;
+    height: 50px;
 }
-
+.binaryHelp{
+    margin-left: 5vw;
+    background-color: grey;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 40px;
+    padding: 1px;
+    margin: 1px;
+    text-align: center;
+    width: 90px;
+}
+.footer{
+    height: 20vh;
+}
 .battleship {
-    width: 100px;
-    /* height: 100%; */
+    width: 50px;
+    height: 50px;
     align-self: center;
-}
-.battleBitsContainer{
-    background-color: black;
 }
 .battleInputContainer{
     display: flex;
     position: fixed;
     width: 50vw;
     color: red;
-    top: 50vh; 
+    top: 90vh; 
     left: 25vw;
     font-family: 'Orbitron', sans-serif;
     background-color: rgba(32, 255, 3, 0.507);

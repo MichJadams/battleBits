@@ -7,13 +7,15 @@ import { findSolution, randomInteger } from '../helperFuncs'
 export default class Play extends Component {
   constructor(props) {
     super(props)
+    if(!this.props.history.location.State){
+      this.props.history.location.State = {}
+    }
     this.state = {
       startTime: false,
-      difficulty: this.props.history.location.State.difficulty,
+      difficulty: this.props.history.location.State.difficulty || 8,
       showMod: false,
       number: 0,
-      showMod: this.props.history.location.State.showMod,
-      showPow: this.props.history.location.State.showPow,
+      showPow: this.props.history.location.State.showPow|| 'true',
       grid: [[]],
       inputArry: [0, 0, 0, 0, 0, 0, 0, 0],
       solutionArray: [],
@@ -22,7 +24,7 @@ export default class Play extends Component {
       selectedRow: 0,
       dead: false,
       lives: this.props.history.location.State.lives || 3,
-      highest: this.props.history.location.State.highest
+      highest: this.props.history.location.State.highest || 3
     }
 
     this.playAgain = this.playAgain.bind(this)
@@ -81,18 +83,15 @@ export default class Play extends Component {
   render() {
     return (this.state.dead ? <div>You are dead.</div> : 
       <div className="battleBitsContainer">
-      <div>Timer:</div>
-      {
-        this.state.showPow == 'true' ? <div>This is the amount that placeing a 1 here represents</div> : null
-      }
       <div className='binaryBox'>
         {this.state.won ? this.flashy() : null}
         {
           this.state.showPow === 'true' ? this.state.inputArry.map((_, ind) => {
-            return (<div className='binary'>{Math.pow(2, this.state.inputArry.length - ind - 1)}</div>)
+            return (<div className='binaryHelp'>{Math.pow(2, this.state.inputArry.length - ind - 1)}</div>)
           }) : null
         }
       </div>
+       
       {
         this.state.grid.map((el, rowIndex) => {
           if (this.state.selectedRow == rowIndex) {
@@ -100,10 +99,10 @@ export default class Play extends Component {
 
               {
                 el.map((el, colIndex) => {
-                  // console.log('ELEMEEEEEENT', el)
+               
                   return (+el === 1 ?
 
-                    <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className=' battleship' src={battleship} />  </div> :
+                    <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className='battleship' src={battleship} />  </div> :
 
                     <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className='mine' src={mine} />  </div>
                   )
@@ -116,10 +115,9 @@ export default class Play extends Component {
               {
                 el.map((el, colIndex) => {
                   return (
-
                     +el === 1 ?
                     
-                    <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className=' battleship' src={battleship} />  </div> :
+                    <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className='battleship' src={battleship} />  </div> :
                     
                     <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className='mine' src={mine} />  </div>
                     
@@ -129,6 +127,7 @@ export default class Play extends Component {
             }
           })
         }
+       
         <div className='battleInputContainer'>
           <input type='text' autoFocus className='inputBox' onChange={this.guessChange} value={this.state.guess} />
           <button  className='inputBtn' onClick={this.checkRow}>Execute</button>
@@ -138,6 +137,7 @@ export default class Play extends Component {
           <div className='battleInput'><button onClick={this.playAgain}>You won!Play again?</button ></div>
           : null
         }
+        <div className='footer'>.</div>
         </div>)
         
       }

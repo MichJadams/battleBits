@@ -124,7 +124,8 @@ export default class Play extends Component {
       {
         this.state.won ?
           <div className='btnBin'>
-          <button  className='practiceBtn' onClick={this.playAgain}>You won!Play again?</button >
+          <div>You won!</div>
+          <button  className='practiceBtn' onClick={this.playAgain}>Play again?</button >
           <button className='practiceBtn' onClick={this.playAgain}>Back to settings</button >
           </div>
           : null

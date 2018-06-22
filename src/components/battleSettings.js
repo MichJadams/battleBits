@@ -49,11 +49,11 @@ export default class battleSettings extends Component {
         <div className="battleSettingsHeader">Prepare for battle</div>
         <form onSubmit={this.handleSubmit} className='gameOptionsForm'>
           <ul>
-            The number of rows
+            The number of rows:
                 <input type="number" value={this.state.difficulty} onChange={this.handleDifficultyChange} />
           </ul>
           <ul>
-            highest decimal
+            highest decimal:
                 <select type="number" value={this.state.highest} onChange={this.handlehighestChange} >
               <option value="1">2</option>
               <option value="2">4</option>
@@ -66,26 +66,19 @@ export default class battleSettings extends Component {
             </select>
           </ul>
           <ul>
-            Number of lives you get for battle bites
+            Lives:
                 <input type="number" value={this.state.lives} onChange={this.handleLivesChange} />
-          </ul>
-          <ul>
-            Show a second number that shows how much is 'left' to represent in binary:
-                <select value={this.state.showMod} onChange={this.handleshowModChange}>
-              <option value="true">Yes</option>
-              <option value="false">No,</option>
-            </select>
           </ul>
           <ul>
             Show the various powers of 2? (1,2,4,8,16,32 ect...):
                 <select value={this.state.showPow} onChange={this.handleshowPowChange}>
+                <option value="false">No</option>
               <option value="true">Yes</option>
-              <option value="false">No</option>
             </select>
           </ul>
         </form>
-        <button autoFocus className='battleBtn' onClick={this.handleSubmitPlay}>Play battleBits!</button>
-        <button  className='battleBtn' type="button" onClick={this.backToSelect}>Back to select game mode</button>
+        <button autoFocus className='battleBtn' onClick={this.handleSubmitPlay}>Play</button>
+        <button  className='battleBtn' type="button" onClick={this.backToSelect}>Back</button>
       </div>
     );
   }

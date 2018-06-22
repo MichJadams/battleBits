@@ -7,20 +7,22 @@
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.383);
     flex-flow: column;
+    padding: 1%;
 
 }
 .battleSettingsHeader{
     font-size: 24px;
-    flex: 1;
+    
     align-self: center;
     font-family: 'Orbitron', sans-serif;
     padding: 2%;
+    height: 10vh;
 }
 .gameOptionsForm{
     align-self: center;
-    width: 50vw;
+    width: 70vw;
     font-size: 24px;
-    flex: 2;
+    
     align-self: center;
     font-family: 'Orbitron', sans-serif;
     background-color: rgba(139, 0, 0, 0.3)
@@ -40,18 +42,18 @@
 .gameOptionsForm ul select{
     background-color: rgba(0, 0, 0, 0.0);
     font-size: 20px;
-    margin: 2px;
+    margin: 1px;
     border: none;
     font-family: 'Orbitron', sans-serif;
 }
 .battleBtn{
     align-self: center;
     width: 50vw;
-    height: 10vw;
+    height: 15vh;
     background-color: grey;
     padding: 1px;
-    margin: 3px;
+    margin: 1px;
     border: solid 3px darkred;
-    font-size: 20px;
+    font-size: 15px;
     font-family: 'Orbitron', sans-serif;
 }
