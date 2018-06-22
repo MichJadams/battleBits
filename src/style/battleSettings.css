@@ -1,1 +1,57 @@
 
+.battleSettingsContainer{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.383);
+    flex-flow: column;
+
+}
+.battleSettingsHeader{
+    font-size: 24px;
+    flex: 1;
+    align-self: center;
+    font-family: 'Orbitron', sans-serif;
+    padding: 2%;
+}
+.gameOptionsForm{
+    align-self: center;
+    width: 50vw;
+    font-size: 24px;
+    flex: 2;
+    align-self: center;
+    font-family: 'Orbitron', sans-serif;
+    background-color: rgba(139, 0, 0, 0.3)
+}
+.gameOptionsForm ul{
+    /* margin: 3px; */
+}
+.gameOptionsForm ul input{
+    background-color: rgba(0, 0, 0, 0.0);
+    font-size: 20px;
+    border: none;
+    margin: 2px;
+    border-bottom: solid;
+    width: 80px;
+    font-family: 'Orbitron', sans-serif;
+}
+.gameOptionsForm ul select{
+    background-color: rgba(0, 0, 0, 0.0);
+    font-size: 20px;
+    margin: 2px;
+    border: none;
+    font-family: 'Orbitron', sans-serif;
+}
+.battleBtn{
+    align-self: center;
+    width: 50vw;
+    height: 10vw;
+    background-color: grey;
+    padding: 1px;
+    margin: 3px;
+    border: solid 3px darkred;
+    font-size: 20px;
+    font-family: 'Orbitron', sans-serif;
+}

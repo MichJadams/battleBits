@@ -8,25 +8,62 @@
     background-color: rgba(255,0,0,0.7)
 }
 .binary{
+    display: flex; 
     padding: 1%;
     border: solid 1px;
-    margin: 1px; 
+    margin: 1px;
+    align-items: center;
+    flex-grow: 1; 
 }
-.binarySelected{
+/* .binarySelected{
     display: flex; 
     padding: 1%;
     border: solid 1px;
     margin: 1px;
     align-items: center;
     flex-grow: 1;
-}
+} */
 
 .mine {
-    width: 100%;
+    width: 100px;
     
 }
 
 .battleship {
-    width: 100%;
+    width: 100px;
+    /* height: 100%; */
     align-self: center;
+}
+.battleBitsContainer{
+    background-color: black;
+}
+.battleInputContainer{
+    display: flex;
+    position: fixed;
+    width: 50vw;
+    color: red;
+    top: 50vh; 
+    left: 25vw;
+    font-family: 'Orbitron', sans-serif;
+    background-color: rgba(32, 255, 3, 0.507);
+}
+.inputBox{
+    flex: 3;
+    width: 30vw;
+    font-size: 50px;
+    font-family: 'Orbitron', sans-serif;
+    outline: none;
+    border:none;
+    background-color: rgba(0,0,0,.6);
+    color: red; 
+}
+.inputBtn{
+    margin:1px;
+    border: none;
+    flex: 1;
+    font-size: 30px;
+    font-family: 'Orbitron', sans-serif;
+    background-color: rgba(0,0,0,.6);
+    outline: none;
+    color: red;
 }

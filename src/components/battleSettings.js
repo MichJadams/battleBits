@@ -45,12 +45,11 @@ export default class battleSettings extends Component {
   }
   render() {
     return (
-      <div className="LandingPageContainer">
-        <div className="LandingPageheader">Prepare for battle</div>
-        <div className='battleTitle'>Select how hard you want to fight</div>
+      <div className="battleSettingsContainer">
+        <div className="battleSettingsHeader">Prepare for battle</div>
         <form onSubmit={this.handleSubmit} className='gameOptionsForm'>
           <ul>
-            Difficulty
+            The number of rows
                 <input type="number" value={this.state.difficulty} onChange={this.handleDifficultyChange} />
           </ul>
           <ul>
@@ -85,8 +84,8 @@ export default class battleSettings extends Component {
             </select>
           </ul>
         </form>
-        <button autoFocus onClick={this.handleSubmitPlay}>Play battleBits!</button>
-        <button  type="button" onClick={this.backToSelect}>Back to select game mode</button>
+        <button autoFocus className='battleBtn' onClick={this.handleSubmitPlay}>Play battleBits!</button>
+        <button  className='battleBtn' type="button" onClick={this.backToSelect}>Back to select game mode</button>
       </div>
     );
   }

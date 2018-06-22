@@ -45,9 +45,8 @@ export default class practiceSettings extends Component {
   }
   render() {
     return (
-      <div className="LandingPageContainer">
-        <div className="LandingPageheader">Landing page here!</div>
-        <div>You can either practice or play Battle bits</div>
+      <div className="practiceSettingsContainer">
+        <div className="practiceSettingsHeader">Practice: you will be prompted to toggle the boxes to match the provided deimcal number</div>
         <form onSubmit={this.handleSubmit} className='gameOptionsForm'>
           <ul>
             highest decimal
@@ -76,9 +75,9 @@ export default class practiceSettings extends Component {
               <option value="false">No</option>
             </select>
           </ul>
-          <button autoFocus type="button" onClick={this.handleSubmitPractice}>Practice!</button>
-          <button  type="button" onClick={this.backToSelect}>Back to select game mode</button>
-        </form>
+          </form>
+          <button autoFocus type="button" className ='practiceBtn' onClick={this.handleSubmitPractice}>Practice!</button>
+          <button  type="button" className ='practiceBtn'  onClick={this.backToSelect}>Back</button>
       </div>
     );
   }

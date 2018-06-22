@@ -20,9 +20,10 @@ componentWillMount(){
   render() {
     return (
       <div className="LandingPageContainer">
-        <div className="LandingPageheader">Landing page here!</div>
-          <button autoFocus type="button" onClick={this.handleSubmitPractice}>Practice!</button>
-        <button autoFocus onClick={this.handleSubmitPlay}>Place battleBits!</button>
+        <div className="LandingPageheader">
+          <button className="LandingPageItem" autoFocus type="button" onClick={this.handleSubmitPractice}>Practice!</button>
+        <button className="LandingPageItem" autoFocus onClick={this.handleSubmitPlay}>Play BattleBits!</button>
+        </div>
       </div>
     );
   }

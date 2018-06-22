@@ -9,9 +9,10 @@ export default class Play extends Component {
     super(props)
     this.state = {
       startTime: false,
-      difficulty: 8,
+      difficulty: this.props.history.location.State.difficulty,
       showMod: false,
       number: 0,
+      showMod: this.props.history.location.State.showMod,
       showPow: this.props.history.location.State.showPow,
       grid: [[]],
       inputArry: [0, 0, 0, 0, 0, 0, 0, 0],
@@ -31,16 +32,7 @@ export default class Play extends Component {
     this.flashy = this.flashy.bind(this)
   }
   componentWillMount() {
-    console.log("the highest", this.props.history.location.State.highest)
-    this.setState({
-      difficulty: this.props.history.location.State.difficulty,
-      showMod: this.props.history.location.State.showMod,
-      showPow: this.props.history.location.State.showPow
-    }, () => {
-      this.setState({ grid: this.generateGrid() }, () => {
-        console.log("the gird", this.state.grid)
-      })
-    })
+      this.setState({ grid: this.generateGrid() })
   }
 
   generateGrid() {
@@ -84,21 +76,11 @@ export default class Play extends Component {
     //maybe do a cool thing here, for when they win
   }
   playAgain() {
-    // this.setState({
-    //   startTime:  false, 
-    //   difficulty: this.props.history.location.State.difficulty, 
-    //   showMod: false,
-    //   number: this.randomInteger(), 
-    //   inputArry: [0,0,0,0,0,0,0,0],
-    //   won: false
-    // }, ()=>{
-    //   this.setState({solutionArray:this.findSolution(this.state.number)})
-    // })
     this.props.history.push({ pathname: `/` })
   }
   render() {
     return (this.state.dead ? <div>You are dead.</div> : 
-      <div className="aboutMeContainer">
+      <div className="battleBitsContainer">
       <div>Timer:</div>
       {
         this.state.showPow == 'true' ? <div>This is the amount that placeing a 1 here represents</div> : null
@@ -118,12 +100,12 @@ export default class Play extends Component {
 
               {
                 el.map((el, colIndex) => {
-                  console.log('ELEMEEEEEENT', el)
+                  // console.log('ELEMEEEEEENT', el)
                   return (+el === 1 ?
 
-                    <div className='binarySelected' key={colIndex} data-id={[colIndex, rowIndex]}> <img className=' battleship' src={battleship} />  </div> :
+                    <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className=' battleship' src={battleship} />  </div> :
 
-                    <div className='binarySelected' key={colIndex} data-id={[colIndex, rowIndex]}> <img className='mine' src={mine} />  </div>
+                    <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className='mine' src={mine} />  </div>
                   )
                 }
 
@@ -135,22 +117,29 @@ export default class Play extends Component {
                 el.map((el, colIndex) => {
                   return (
 
-                    <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}>{el}</div>
-
+                    +el === 1 ?
+                    
+                    <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className=' battleship' src={battleship} />  </div> :
+                    
+                    <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className='mine' src={mine} />  </div>
+                    
                   )
                 })
               }</div>)
-          }
-        })
-      }
-      <div>guess here: <input type='text' onChange={this.guessChange} value={this.state.guess} /><button onClick={this.checkRow}>submit guess</button></div>
-      {
-        this.state.won ?
-          <div onClick={this.playAgain}><button>You won!Play again?</button ></div>
+            }
+          })
+        }
+        <div className='battleInputContainer'>
+          <input type='text' autoFocus className='inputBox' onChange={this.guessChange} value={this.state.guess} />
+          <button  className='inputBtn' onClick={this.checkRow}>Execute</button>
+        </div>
+        {
+          this.state.won ?
+          <div className='battleInput'><button onClick={this.playAgain}>You won!Play again?</button ></div>
           : null
+        }
+        </div>)
+        
       }
-    </div>)
-
-  }
-}
-
+    }
+    

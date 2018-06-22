@@ -1,9 +1,80 @@
 .binaryBox{
     display: flex; 
     justify-content: space-around;
+    width: 60vw;
+    padding-top: 30px;
+    align-self: center;
+}
+.binaryBoxSelected{
+    display: flex; 
+    justify-content: space-around;
+    background-color: rgba(255,0,0,0.7)
 }
 .binary{
-    padding: 1%;
+    display: initial;
+    background-color: rgba(32, 255, 3, 0.507);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 40px;
+    padding: 1px;
     border: solid 1px;
-    margin: 1px; 
+    margin: 1px;
+    text-align: center;
+    width: 90px;
 }
+.binaryHelp{
+    background-color: rgba(32, 255, 3, 0.507);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 40px;
+    padding: 1px;
+    margin: 1px;
+    text-align: center;
+    width: 90px;
+}
+.practiceHint{
+    font-family: 'Orbitron', sans-serif;
+    background-color: rgba(172, 13, 52, 0.307);
+    align-self: center;
+    padding: 1%;
+    margin: 1%;
+    font-size: 25px;
+    width: 50vw;
+}
+.practiceBitsContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: grey;
+    height: 100vh; 
+    width: 100vw;
+    padding: 15px;
+}
+.practiceInfo{
+    font-family: 'Orbitron', sans-serif;
+    background-color: rgba(32, 255, 3, 0.307);
+    align-self: center;
+    padding: 1%;
+    font-size: 25px;
+    width: 50vw;
+}
+.practiceInputContainer{
+    display: flex;
+    position: fixed;
+    width: 50vw;
+    color: red;
+    top: 50vh; 
+    left: 25vw;
+    font-family: 'Orbitron', sans-serif;
+    background-color: rgba(32, 255, 3, 0.507);
+}
+.practiceBtn{
+    background-color: grey;
+    padding: 1px;
+    margin: 1px;
+    border: solid 3px darkred;
+    font-size: 10px;
+    font-family: 'Orbitron', sans-serif;
+}
+.btnBin{
+    align-self: center;
+    width: 40vw;
+}
+

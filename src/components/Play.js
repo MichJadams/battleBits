@@ -95,21 +95,20 @@ export default class Play extends Component {
   }
 
   render() {
-    console.log("the show", this.state.showPow)
-    return (<div className="aboutMeContainer">
-      <div>This is your number: {this.state.number}</div>
-      <div>The boxes start out showing all zeros. Click on them to toggle them to creat the binary representation of the decimal number  {this.state.number}</div>
-      <div>(coming soon)Timer:</div>
+    return (<div className="practiceBitsContainer">
+      <div className='practiceInfo'>This is your number:   {this.state.number}</div>
+      <div className='practiceInfo'>Click the boxes to toggle them</div>
+      <div className='practiceInfo'>(coming soon)Timer:</div>
       {
-        this.state.showMod == 'true' ? <div>The amount of decimal number to still 'take away': {this.state.amountLeft}</div> : null
+        this.state.showMod == 'true' ? <div className='practiceHint'>The amount of decimal number to still 'take away': {this.state.amountLeft}</div> : null
       }
       {
-        this.state.showPow == 'true' ? <div>This is the amount that placeing a 1 here represents</div> : null
+        this.state.showPow == 'true' ? <div className='practiceHint'>The top row shows you powers of two</div> : null
       }
       <div className='binaryBox'>
         {
           this.state.showPow === 'true' ? this.state.powers.map((el, ind) => {
-            return (<div className='binary' key={ind}>{el}</div>)
+            return (<div className='binaryHelp' key={ind}>{el}</div>)
           }) : null
         }
       </div>
@@ -124,9 +123,9 @@ export default class Play extends Component {
       </div>
       {
         this.state.won ?
-          <div >
-          <button onClick={this.playAgain}>You won!Play again?</button >
-          <button onClick={this.backToSettings}>Back to settings</button >
+          <div className='btnBin'>
+          <button  className='practiceBtn' onClick={this.playAgain}>You won!Play again?</button >
+          <button className='practiceBtn' onClick={this.playAgain}>Back to settings</button >
           </div>
           : null
       }
