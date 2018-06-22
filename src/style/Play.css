@@ -74,7 +74,14 @@
     font-family: 'Orbitron', sans-serif;
 }
 .btnBin{
-    align-self: center;
-    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding-top: 25px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
+    /* align-self: center; */
+    /* width: 20vw; */
 }
 

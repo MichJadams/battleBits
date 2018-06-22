@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import '../style/battleBits.css';
 import battleship from '../style/assets/navy-ship.svg'
 import mine from '../style/assets/mine.png'
+import fire from '../style/assets/fiyah.gif'
 import { findSolution, randomInteger } from '../helperFuncs'
 
 export default class Play extends Component {
   constructor(props) {
     super(props)
-    if(!this.props.history.location.State){
+    if (!this.props.history.location.State) {
       this.props.history.location.State = {}
     }
     this.state = {
@@ -15,16 +16,17 @@ export default class Play extends Component {
       difficulty: this.props.history.location.State.difficulty || 8,
       showMod: false,
       number: 0,
-      showPow: this.props.history.location.State.showPow|| 'true',
+      showPow: this.props.history.location.State.showPow || 'true',
       grid: [[]],
       inputArry: [0, 0, 0, 0, 0, 0, 0, 0],
       solutionArray: [],
       won: false,
-      guess: 0,
+      guess: null,
       selectedRow: 0,
       dead: false,
       lives: this.props.history.location.State.lives || 3,
-      highest: this.props.history.location.State.highest || 3
+      highest: this.props.history.location.State.highest || 3,
+      incorrectGuess: false
     }
 
     this.playAgain = this.playAgain.bind(this)
@@ -32,9 +34,10 @@ export default class Play extends Component {
     this.guessChange = this.guessChange.bind(this)
     this.generateGrid = this.generateGrid.bind(this)
     this.flashy = this.flashy.bind(this)
+    this.displayWarning = this.displayWarning.bind(this)
   }
   componentWillMount() {
-      this.setState({ grid: this.generateGrid() })
+    this.setState({ grid: this.generateGrid() })
   }
 
   generateGrid() {
@@ -61,14 +64,15 @@ export default class Play extends Component {
         this.setState({ won: true })
       } else {
         let nextrow = this.state.selectedRow + 1
-        this.setState({ selectedRow: nextrow })
+        this.setState({ selectedRow: nextrow, guess: 0 })
       }
     } else {
       let livesLeft = this.state.lives - 1
       //set the state here to fire
       //turnary if fire is true than set mines to fire gifs
 
-      this.setState({ lives: livesLeft })
+      this.setState({ lives: livesLeft, incorrectGuess: true })
+
       if (livesLeft < 0) {
         this.setState({ dead: true })
       }
@@ -77,69 +81,84 @@ export default class Play extends Component {
   flashy() {
     //maybe do a cool thing here, for when they win
   }
+
+  displayWarning() {
+    if (this.state.incorrectGuess) {
+      setTimeout(() => {
+        this.setState({ incorrectGuess: false })
+      }, 3000)
+    }
+  }
+
   playAgain() {
     this.props.history.push({ pathname: `/` })
   }
   render() {
-    return (this.state.dead ? <div>You are dead.</div> : 
+    return (this.state.dead ? <div className='dead'>You are dead.</div> :
       <div className="battleBitsContainer">
-      <div className='binaryBox'>
-        {this.state.won ? this.flashy() : null}
         {
-          this.state.showPow === 'true' ? this.state.inputArry.map((_, ind) => {
-            return (<div className='binaryHelp'>{Math.pow(2, this.state.inputArry.length - ind - 1)}</div>)
-          }) : null
+          this.state.incorrectGuess ? <div className='guessWarning'> {this.displayWarning()}
+            <img src={fire} /> <br />Many bothans dies to <br />bring us this information</div> : null
         }
-      </div>
-       
-      {
-        this.state.grid.map((el, rowIndex) => {
-          if (this.state.selectedRow == rowIndex) {
-            return (<div key={rowIndex} className='binaryBoxSelected'>
+        <div className='binaryBox'>
+          {this.state.won ? this.flashy() : null}
+          {
+            this.state.showPow === 'true' ? this.state.inputArry.map((_, ind) => {
+              return (<div className='binaryHelp'>{Math.pow(2, this.state.inputArry.length - ind - 1)}</div>)
+            }) : null
+          }
+          <div className='livesCounter'>Lives Left: {this.state.lives}</div>
+        </div>
 
-              {
-                el.map((el, colIndex) => {
-               
-                  return (+el === 1 ?
 
-                    <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className='battleship' src={battleship} />  </div> :
+        {
+          this.state.grid.map((el, rowIndex) => {
+            if (this.state.selectedRow == rowIndex) {
+              return (<div key={rowIndex} className='binaryBoxSelected'>
 
-                    <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className='mine' src={mine} />  </div>
+                {
+                  el.map((el, colIndex) => {
+
+                    return (+el === 1 ?
+
+                      <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className='battleship' src={battleship} />  </div> :
+
+                      <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className='mine' src={mine} />  </div>
+                    )
+                  }
+
                   )
-                }
+                } </div>)
+            } else {
+              return (<div key={rowIndex} className='binaryBox'>
+                {
+                  el.map((el, colIndex) => {
+                    return (
+                      +el === 1 ?
 
-                )
-              } </div>)
-          } else {
-            return (<div key={rowIndex} className='binaryBox'>
-              {
-                el.map((el, colIndex) => {
-                  return (
-                    +el === 1 ?
-                    
-                    <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className='battleship' src={battleship} />  </div> :
-                    
-                    <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className='mine' src={mine} />  </div>
-                    
-                  )
-                })
-              }</div>)
+                        <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className='battleship' src={battleship} />  </div> :
+
+                        <div className='binary' key={colIndex} data-id={[colIndex, rowIndex]}> <img className='mine' src={mine} />  </div>
+
+                    )
+                  })
+                }</div>)
             }
           })
         }
-       
+
         <div className='battleInputContainer'>
-          <input type='text' autoFocus className='inputBox' onChange={this.guessChange} value={this.state.guess} />
-          <button  className='inputBtn' onClick={this.checkRow}>Execute</button>
+          <input type='text' autoFocus className='inputBox' onChange={this.guessChange} value={this.state.guess} placeholder={'0'} />
+          <button type='submit' className='inputBtn' onClick={this.checkRow}>Execute</button>
         </div>
         {
           this.state.won ?
-          <div className='battleInput'><button onClick={this.playAgain}>You won!Play again?</button ></div>
-          : null
+            <div className='winningButton' ><button className='battleInput' onClick={this.playAgain}>You won! Play again? </button ></div>
+            : null
         }
         <div className='footer'>.</div>
-        </div>)
-        
-      }
-    }
-    
+      </div>)
+
+  }
+}
+
