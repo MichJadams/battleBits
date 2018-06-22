@@ -76,8 +76,8 @@ export default class Play extends Component {
       this.calcAmountLeft()
     })
   }
-  backToSettings(){
-    this.props.history.push({pathname: '/practiceSettings'})
+  backToSettings() {
+    this.props.history.push({ pathname: '/practiceSettings' })
   }
   playAgain() {
     this.setState({
@@ -124,9 +124,9 @@ export default class Play extends Component {
       {
         this.state.won ?
           <div className='btnBin'>
-          <div>You won!</div>
-          <button  className='practiceBtn' onClick={this.playAgain}>Play again?</button >
-          <button className='practiceBtn' onClick={this.playAgain}>Back to settings</button >
+            <div>✨ You won! ✨</div>
+            <button className='practiceBtn' onClick={this.playAgain}>Play again?</button >
+            <button className='practiceBtn' onClick={this.playAgain}>Back to settings</button >
           </div>
           : null
       }
